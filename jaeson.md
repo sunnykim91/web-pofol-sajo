@@ -1,6 +1,6 @@
 Tag lists of 'https://www.lifeplus.co.kr/'
 
-//
+<!--
 0. <!doctype> : 마크업 언어용 DTD태그.
 1. <html> : 위의 DTD를 제외한 전체를 이 태그로 둘러싼다.
 2. <meta> : HTML의 부가 정보를 선언하는 태그. 예를 들어 charset 속성을 쓰면 인코딩을 선언할 수 있다. 
@@ -25,5 +25,4 @@ Tag lists of 'https://www.lifeplus.co.kr/'
 21. <dt> : 정의 목록의 정의 기술
 22. <dd> : 정의 목록의 뜻풀이
 23. <iframe>
-
-//
+-->
