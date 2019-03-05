@@ -1,5 +1,5 @@
-# 오늘 과제
-
+# 선정한 웹페이지에 쓰인 태그 조사
+Link : https://www.lifeplus.co.kr
 - html : html 문서의 시작과 끝을 알리는 태그
 - head : 머리말 태그
 - body : 본문 태그
