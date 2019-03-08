@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--<img class="test_image" src="social-img/iconfinder_youtube-media-video-share-social_1169181.png">-->
+    <img class="test_image" src="social-img/iconfinder_mac-apple-software-hardware-system_1169162.png">
+    <a href="#" class="btn">버튼</a>
+
+
+
+<script type="text/javascript">
+    $( ".btn" ).click(function(e) {
+        e.preventDefault();     //  원래 예정되어 있던 동작을 하지 않겠다. a태그를 클릭하면 원래는 어디론가 이동을 해야하는데 그것을 막기 위해서.
+        // alert( "Handler for .click() called." );
+        // if($(".test_image:visible").length) {
+        //     $(".test_image").hide();
+        // }
+        console.log("no");
+        $(".test_image").toggle();
+    });
+</script>
+</body>
+</html>
