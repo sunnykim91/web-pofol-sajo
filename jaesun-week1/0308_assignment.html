@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>JQUERY HOMEWORK</title>
+
+    <style type="text/css">
+
+        #show{
+            opacity: 100;
+        }
+
+        #hide{
+            opacity:0;
+        }
+
+
+        .whole_wrapper{
+            width: 450px;
+            height: 150px;
+        }
+        .img_container{
+            position: relative;
+            float: left;
+            width: 70%;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .img_container img{
+            width:100%;
+            height: 100%;
+        }
+
+        .img_container .img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .img_container .apple_wrapper{
+            z-index: 1;
+            position: absolute;
+
+        }
+        .img_container .instagram_wrapper{
+            opacity: 0;
+            position: absolute;
+        }
+        .img_container .twitter_wrapper{
+            opacity: 0;
+            position: absolute;
+        }
+        .img_container .youtube_wrapper{
+            opacity: 0;
+            position: absolute;
+        }
+
+        .button_container{
+            width: 20%;
+            float: right;
+        }
+        .button_container a{
+            display: block;
+            height: 25%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="whole_wrapper">
+    <div class="img_container">
+        <div class="img apple_wrapper" id="show">
+            <img src="social-img/iconfinder_mac-apple-software-hardware-system_1169162.png">
+        </div>
+        <div class="img instagram_wrapper">
+            <img src="social-img/iconfinder_photo-instagram-share-social-media_1169166.png">
+        </div>
+        <div class="img twitter_wrapper">
+            <img src="social-img/iconfinder_twitter-social-media-bird_1169176.png">
+        </div>
+        <div class="img youtube_wrapper">
+            <img src="social-img/iconfinder_youtube-media-video-share-social_1169181.png">
+        </div>
+    </div>
+    <div class="button_container">
+        <a href="#" class="apple">a</a>
+        <a href="#" class="instagram">b</a>
+        <a href="#" class="twitter">c</a>
+        <a href="#" class="youtube">d</a>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $( ".apple" ).click(function(e) {
+        e.preventDefault();
+        $(".img").attr("id","hide");
+        console.log('hide');
+        $(".apple_wrapper").attr("id","show");
+        console.log('show');
+    });
+    $( ".instagram" ).click(function(e) {
+        e.preventDefault();
+        $(".img").attr("id","hide");
+        console.log('hide');
+        $(".instagram_wrapper").attr("id","show");
+        console.log('show');
+    });
+    $( ".twitter" ).click(function(e) {
+        e.preventDefault();
+        $(".img").attr("id","hide");
+        console.log('hide');
+        $(".twitter_wrapper").attr("id","show");
+        console.log('show');
+    });
+    $( ".youtube" ).click(function(e) {
+        e.preventDefault();
+        $(".img").attr("id","hide");
+        console.log('hide');
+        $(".youtube_wrapper").attr("id","show");
+        console.log('show');
+    });
+
+</script>
+
+</body>
+</html>
