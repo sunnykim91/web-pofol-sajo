@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <script src="script/script.js"></script>
+    <style>
+        
+        .area{
+            display: inline-table;
+            border: 2px solid skyblue;
+            width: 500px;
+            height: 500px;
+        }
+        .img_area{
+            display: table-cell;
+            
+            border: 2px solid black;
+            
+        }
+        .num_area{
+            display: table-cell;
+            
+            border: 2px solid black;
+            
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="area">
+        <div class="img_area" style="position:absolute">
+            <div >
+                <img src="smartphoneimg.png"></img>
+            </div>
+        </div>
+        <div class="cat_area img_area" style="position:absolute">
+            <div style="position: relative; top: 130px; left: 38px;">
+                <img class="cat_area catimg" src="cat1.png" style="display:inline-block;position:absolute;"></img>
+            </div>
+        </div>  
+        <div class="num_area" style="float:right;">
+           <img class="btn1" src="num1.png">
+           <img class="btn2" src="num2.png">
+           <img class="btn3" src="num3.png">
+           <img class="btn4" src="num4.png">
+        </div>
+    </div>
+        
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $('.btn1').on("click", function(){
+            $('img.catimg').attr({"src":"cat1.png"});
+            return false;[]
+        });
+        $('.btn2').on("click", function(){
+            $('img.catimg').attr({"src":"cat2.png"});
+            return false;
+        });
+
+        $('.btn3').on("click", function(){
+            $('img.catimg').attr({"src":"cat3.png"});
+            return false;
+        });
+
+        $('.btn4').on("click", function(){
+            $('img.catimg').attr({"src":"cat4.png"});
+            return false;
+        });
+        });
+    </script> 
+    
+</body>
+
+
+</html>
