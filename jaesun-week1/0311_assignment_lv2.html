@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+
+<p onclick="fh()">화씨 변환기</p>
+<span id="fh"></span>
+<p onclick="cl()">섭씨 변환기</p>
+<span id="cl"></span>
+
+
+
+
+<script type="text/javascript">
+    function fh(){
+        var result = null;
+        var fh = prompt("화씨를 입력하세요","F");
+
+        result = (fh-32)/1.8;
+
+        document.getElementById("fh").innerHTML=result;
+    }
+    function cl() {
+        var result = null;
+        var cl = prompt("섭씨를 입력하세요","C");
+        result = cl*1.8-32;
+
+        document.getElementById("cl").innerHTML=result;
+
+    }
+</script>
+
+</body>
+</html>
