@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+
+        var result = 0;
+        var tmp = null;
+
+        while(true){
+            console.log("1번: 화씨->섭씨 변환하기","C");
+            console.log("2번: 섭씨->화씨 변환하기","F");
+            console.log("프로그램 종료하기");
+
+            var menu = prompt("메뉴를 선택하세요");
+
+            if(menu==1){
+                if(tmp==null) {
+                    var fahrenheit = prompt("화씨를 입력하세요","F");
+                    var result = (fahrenheit - 32) / 1.8;
+                    var tmp = result;
+                    console.log("섭씨"+result);
+                }else if(tmp !=null){
+                    console.log(tmp);
+                    tmp = null;
+                }
+            }else if(menu==2){
+                if(tmp ==null) {
+                    var celsius = prompt("섭씨를 입력하세요","C");
+                    var result = celsius * 1.8 + 32;
+                    var tmp = result;
+                    console.log("화씨"+result);
+                } else if(tmp !=null){
+                    console.log("화씨"+tmp);
+                    tmp = null;
+                }
+            }else{
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+
+
+
+</body>
+</html>

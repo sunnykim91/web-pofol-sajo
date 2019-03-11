@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+
+        /*
+
+        * while([조건식]){ [ 조건식 ]:
+        *
+        *   break; // 만나는 순간 가장 가까운 반복문을 탈출
+        *   continue: // 만나는 순간 반복문의 다음 회차로 이동.
+        * }
+        *
+        *
+        *
+        * */
+        //
+        // var i=0;
+        // while(i<100){
+        //     console.log("Hi");
+        //     break;
+        // }
+
+        while(true){
+            console.log("menu");
+            console.log("1. 숫자 입력");
+            console.log("2. 문자 입력");
+            console.log("3. 프로그램 종료");
+            menu=prompt("menu를 선택하세요","1");
+            if(menu==1){
+                console.log("숫자 입력 시작");
+            }else if(menu==2){
+                console.log("문자 입력 시작");
+            }else if(menu==3){
+                console.log("프로그램종료");
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
