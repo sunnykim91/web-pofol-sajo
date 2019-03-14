@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <img class="cat_img" src="cat1.png" alt="">
+    <a href="#" class="btn">변경</a>
+
+    <script type="text/javascript">
+        $(".btn").click(function(e){
+            e.preventDefault();
+            $(".cat_img").toggle();
+        })
+    </script>
+    
+</body>
+</html>

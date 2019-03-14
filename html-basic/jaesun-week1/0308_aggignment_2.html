@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        h2 {
+            background-color: #5d8599;
+            font-weight: 600;
+            font-size: 2.571em;
+            color: #00BA51;
+            text-align: center;
+        }
+
+        .container1 {
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            height: 500px;
+        }
+
+        .img_container {
+            width: 50%;
+            height: 100%;
+            border-right: #3C5A99 solid 3px;
+            float: left;
+
+        }
+
+        .card_container{
+            float: right;
+            width:auto;
+        }
+
+        .img_inner_container {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .items {
+            position: absolute;
+            top: 100px;
+            left: -30px;
+
+        }
+        .item_1{
+            opacity: 1;
+            background-color: white;
+        }
+        .item_2{
+            opacity: 0;
+            z-index: 2;
+
+        }
+        .item_3{
+            opacity: 0;
+            z-index: 3;
+        }
+        .item_4{
+            opacity: 0;
+            z-index: 4;
+        }
+
+        .img_container img {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+
+
+        .card_container{
+            width: 50%;
+        }
+
+
+        .card{
+            width: 100%;
+            height: 20%;
+        }
+
+        .card_circle{
+            display: inline-block;
+        }
+        .card_left{
+            display: inline-block;
+            width:5%;
+            float: left;
+        }
+
+        .card_left img{
+            display: inline-block;
+
+        }
+        .card_right{
+            display: inline-block;
+            height: 50%;
+            width: auto;
+            float: right;
+        }
+    </style>
+
+</head>
+<body>
+<div class="whole_wrapper">
+    <header>
+        <h2>How It Works</h2>
+    </header>
+    <div class="container1">
+        <div class="img_container">
+            <div class="img_inner_container">
+                <div class="items item_1">
+                    <img src="social-img/iconfinder_mac-apple-software-hardware-system_1169162.png">
+                </div>
+                <div class="items item_2">
+                    <img src="social-img/iconfinder_youtube-media-video-share-social_1169181.png">
+                </div>
+                <div class="items item_3">
+                    <img src="social-img/iconfinder_twitter-social-media-bird_1169176.png">
+                </div>
+                <div class="items item_4">
+                    <img src="social-img/iconfinder_facebook-social-media-share-platform_1169155.png">
+                </div>
+            </div>
+        </div>
+        <div class="card_container">
+            <div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card card_1">
+                <div class="card_left">
+                   <div class="card_circle">
+                       1
+                   </div>
+                    <div>
+                        <img src="./Screenshot%202019-03-08_18-46-04-865.png">
+                    </div>
+
+                </div>
+                <div class="card_right">
+                    <p class="card_detail">Book in Just 2 Taps</p>
+                    <p>Key in your pick-up and drop-off locations to get your estimated fare.</p>
+                </div>
+            </div>
+            <div class="card card_2">
+                <div class="card_left">
+                    <div class="card_circle">
+                        1
+                    </div>
+                    <div>
+                        <img src="./Screenshot%202019-03-08_18-46-04-865.png">
+                    </div>
+
+                </div>
+                <div class="card_right">
+                    <span>Book in Just 2 Taps</span>
+                </div>
+            </div>
+            <div class="card card_3">
+                <div class="card_left">
+                    <div class="card_circle">
+                        1
+                    </div>
+                    <div>
+                        <img src="./Screenshot%202019-03-08_18-46-04-865.png">
+                    </div>
+
+                </div>
+                <div class="card_right">
+                    <span>Book in Just 2 Taps</span>
+                </div>
+            </div>
+            <div class="card card_4">
+                <div class="card_left">
+                    <div class="card_circle">
+                        1
+                    </div>
+                    <div>
+                        <!--<img src="./Screenshot%202019-03-08_18-46-04-865.png">-->
+                    </div>
+
+                </div>
+                <div class="card_right">
+                    <span>Book in Just 2 Taps</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
