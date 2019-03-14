@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    추가할 기능
+    완료 버튼을 누르면 전부 삭제
+    추가할 수 있는 리스트 개수 제한
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <style>
+        .square {
+            background-image: url('images/time.jpg');
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 1000px;
+            /* text-align: center; */
+        }
+
+        .wrapper {
+            margin-left: 34%;
+        }
+
+        .to_do_list {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: 600;
+            margin-left: 38%;
+        }
+
+        body {
+            margin: 0 auto;
+            color: white;
+        }
+
+        p {
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .sub {
+            display: block;
+            text-align: end;
+            margin-left: 62px;
+        }
+
+        .main_icon {
+            display: inline-block;
+            font-size: 60px;
+            /* margin-top: 10px; */
+            position: absolute;
+            top: 80px;
+            right: 329px;
+        }
+
+        .top_txt {
+            padding-top: 100px;
+        }
+
+        .mdl-button--fab.mdl-button--colored {
+            background-color: cadetblue;
+        }
+
+        .welcome {
+            font-size: 60px;
+            font-weight: 700;
+        }
+
+        .tictok {
+            text-align: left;
+            padding-left: 100px;
+            line-height: 100px;
+            font-size: 50px;
+            font-weight: 700;
+        }
+
+        #tik {
+            font-size: 16px;
+        }
+
+        /* .mdl-textfield__input {
+            display: inline-block;
+        } */
+    </style>
+
+
+</head>
+
+<body>
+    <div class="square" id="div1">
+        <div class="wrapper">
+            <div class="top_txt">
+                <p class="welcome">Welcome!, bro!</p>
+                <div id="clock"></div>
+                <i class="material-icons md-dark main_icon">hourglass_empty</i>
+            </div>
+            <!-- <div class="sub">
+            <input type="text" class="sub_input" name="todo">
+            <input type="submit" class="sub_go" name="가입완료" value="go">
+        </div> -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sub">
+                <input id="input_todo" class="mdl-textfield__input" type="text" name="todo" autocomplete="off">
+                <label class="mdl-textfield__label">TODO!</label>
+                <button id="go"
+                    class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored sub_go">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        // var currentA = new Date();
+        // var currentB = currentA.getMonth()+1;
+
+        // var currentD = currentB +'-'+ currentC;
+
+        var month = ["January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December"];
+        var currentD = new Date();
+        var d = currentD.getMonth();
+        var currentDt = currentD.getDate();
+        var dd = month[d] + '-' + currentDt;
+
+        $(document).ready(function () {
+            $('.sub_go').click(function (e) {
+                e.preventDefault();
+                if ($('input[name="todo"]').val() == '') {
+                    alert('내용을 입력해 주세요.');
+                    //return false;
+                } else {
+                    // $('.square').append('<li class="test">' + $('input[name="todo"]').val()
+                    //     + '<button class="remove">remove</button>' + '</li>');
+
+                    $('.square').append('<ul><li class="to_do_list">' + $('input[name="todo"]').val()
+                        + '<i id="list_del" class="material-icons md-dark icon">delete_forever</i>' +
+                        '<span id="tik">' + dd + '</span>' + '</li></ul>');
+
+                    // $('.square').append('<li class="mdl-list__item to_do_list">' + $('input[name="todo"]').val()
+                    //     + '<i id="list_del" class="material-icons mdl-list__item-icon">delete_forever</i>' + '</li>'+'<br>');
+
+                    $('input[name="todo"]').val('');
+                }
+            });
+        });
+
+        $(document).on("click", '#list_del', function (e) {
+            e.preventDefault();
+            $(this).parent().remove();
+        })
+
+
+        function updateClock() {
+            var currentTime = new Date();
+            var currentHours = currentTime.getHours();
+            var currentMinutes = currentTime.getMinutes();
+            var currentSeconds = currentTime.getSeconds();
+
+            // Pad the minutes and seconds with leading zeros, if required
+            currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+            currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+            // Choose either "AM" or "PM" as appropriate
+            var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+
+            // Convert the hours component to 12-hour format if needed
+            currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+
+            // Convert an hours component of "0" to "12"
+            currentHours = (currentHours == 0) ? 12 : currentHours;
+
+            // Compose the string for display
+            var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+
+            $("#clock").html('<p class="tictok">' + currentTimeString + '</p>');
+            //$('#clock').append('<span>'+currentTimeString+'</span>');
+            //$('#clock').remove();
+
+        }
+
+        $(document).ready(function () {
+            setInterval('updateClock()', 1000);
+        });
+
+        $("#input_todo").keypress(function (e) {
+            if (e.which == 13) {
+                $("#go").click();
+            }
+        });
+    </script>
+</body>
+
+</html>
