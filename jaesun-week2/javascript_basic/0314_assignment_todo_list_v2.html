@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+    .demo-layout-transparent {
+        background: url('https://i.imgur.com/cSGJJw5.jpg') center / cover;
+    }
+
+    .demo-layout-transparent .mdl-layout__header,
+    .demo-layout-transparent .mdl-layout__drawer-button {
+        /* This background is dark, so we set text to white. Use 87% black instead if
+           your background is light. */
+        color: white;
+    }
+
+    .add-btn {
+        margin-left: 0.5em;
+
+    }
+
+    .add_todo {
+        margin-left: 8em;
+        color: #d5d5d5;
+        opacity: 0;
+    }
+
+    .add_submit {
+        margin-left: 12em;
+        height: 22px !important;
+        min-width: 22px !important;
+        width: 22px !important;
+        background: darkred !important;
+    }
+
+    .demo-list-action {
+        width: 300px;
+    }
+
+    .parent-todolist {
+        display: none;
+    }
+
+    .todolist-content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .todolist-prepend-left {
+        list-style: none;
+    }
+    .todolist-prepend-centers{
+        list-style: none;
+    }
+    .todolist-prepend-right {
+        list-style: none;
+    }
+
+    .todo-over {
+        overflow: hidden;
+        width: 300px;
+    }
+
+    .demo-list-action {
+    }
+
+    .inner-span {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    #delete-list {
+
+    }
+
+    .todo-left {
+        float: left;
+        margin: auto;
+    }
+
+    .todo-right {
+        float: right;
+        margin-right: 85px;
+        margin-top: -407px;
+    }
+
+    .todo-centers {
+        margin-left: 388px;
+
+    }
+
+    .strong {
+        border: 2px solid darkorange;
+        border-radius: 50%;
+    }
+
+</style>
+
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="add-btn-area mdl-layout__header-row">
+            <!-- Title -->
+            <span class="add-btn-area mdl-layout-title">Todo List</span>
+            <!-- Colored mini FAB button -->
+            <button class="add-btn-area add-btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab mdl-button--colored">
+                <i class="add-btn-area material-icons">add</i>
+            </button>
+
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">모든항목</a>
+                <a class="mdl-navigation__link" href="">진행중</a>
+                <a class="mdl-navigation__link" href="">완료</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="add-btn-area mdl-layout-title">Title</span>
+        <nav class="add-btn-area mdl-navigation">
+            <a class="mdl-navigation__link" href="">모든항목</a>
+            <a class="mdl-navigation__link" href="">진행중</a>
+            <a class="mdl-navigation__link" href="">완료</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="add_todo text-area">
+            <form action="#">
+                <div class="text-area mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="todo-content" class="text-area mdl-textfield__input" type="text" id="sample3">
+                    <label class="text-area mdl-textfield__label" for="sample3">What to do...</label>
+                    <!-- Colored mini FAB button -->
+                    <button class="text-area add_submit mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="todo-add-btn text-area material-icons">add</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="todo-left demo-list-action mdl-list">
+            <ul class="todolist-prepend-left">
+                <!--<li class="todolist_add_div">-->
+                    <!--<div class="todo-over mdl-list__item">-->
+                        <!--<span class="mdl-list__item-primary-content inner-span">-->
+                            <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                            <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+                        <!--</span>-->
+                        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="todolist_add_div">-->
+                    <!--<div class="todo-over mdl-list__item">-->
+                        <!--<span class="mdl-list__item-primary-content inner-span">-->
+                            <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                            <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+                        <!--</span>-->
+                        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="todolist_add_div">-->
+                    <!--<div class="todo-over mdl-list__item">-->
+                        <!--<span class="mdl-list__item-primary-content inner-span">-->
+                            <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                            <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+                        <!--</span>-->
+                        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="todolist_add_div">-->
+                    <!--<div class="todo-over mdl-list__item">-->
+                        <!--<span class="mdl-list__item-primary-content inner-span">-->
+                            <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                            <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+                        <!--</span>-->
+                        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="todolist_add_div">-->
+                    <!--<div class="todo-over mdl-list__item">-->
+                        <!--<span class="mdl-list__item-primary-content inner-span">-->
+                            <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                            <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+                        <!--</span>-->
+                        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+                    <!--</div>-->
+                <!--</li>-->
+
+            </ul>
+        </div>
+
+        <div class="todo-centers demo-list-action mdl-list">
+        <ul class="todolist-prepend-centers">
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li> <li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="todo-done mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+
+        </ul>
+        </div>
+
+        <div class="todo-right demo-list-action mdl-list">
+        <ul class="todolist-prepend-right">
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li> <li class="todolist_add_div">-->
+        <!--<div class="todo-over mdl-list__item">-->
+        <!--<span class="mdl-list__item-primary-content inner-span">-->
+        <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+        <!--<span class="todolist-content">또또가스 또또또가스 또까쓰 돈가스 돈까쓰</span>-->
+        <!--</span>-->
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
+        <!--<a id="delete-list" class="mdl-list__item-secondary-action" href="#" ><i class="material-icons">star</i></a>-->
+        <!--</div>-->
+        <!--</li>-->
+
+        </ul>
+        </div>
+
+    </main>
+    <script type="text/javascript">
+        $(".add-btn").click(function () {
+
+            console.log("add click")
+            $(".add_todo").css('opacity', '0');
+        })
+        $('body').click(function (e) {
+            if (!$(e.target).hasClass("text-area") && !$(e.target).hasClass("add-btn-area")) {
+
+                console.log('영역 밖입니다.');
+
+                $(".add_todo").css('opacity', '1');
+
+            }
+        });
+
+
+        var add_count = 0;
+
+        $(document).on("click", ".add_submit", function () {
+
+            if (add_count < 5) {
+                var content = $('#todo-content').text();
+                $(".todolist-prepend-left").prepend(" <li id=\""+add_count+"\" class=\"todolist_add_div\">\n" +
+                    "                    <div class=\"todo-over mdl-list__item\">\n" +
+                    "                 <span class=\"mdl-list__item-primary-content\ inner-span\">\n" +
+                    "                     <i class=\"material-icons mdl-list__item-avatar\">person</i>\n" +
+                    "                 <span class=\"todolist-content\">" + $("#todo-content").val() + "</span>\n" +
+                    "                 </span>\n" +
+                    "                        <a class=\"todo-done mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>\n" +
+                    "                        <a id=\"delete-list\" class=\"mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>" +
+                    "                    </div>\n" +
+                    "                </li>");
+
+                // $(this).text(content);
+            }else if(add_count<10 && add_count>4){
+                var content = $('#todo-content').text();
+                console.log(add_count);
+
+                $(".todolist-prepend-centers").prepend("<li id=\""+add_count+"\" class=\"todolist_add_div\">\n" +
+                    "                    <div class=\"todo-over mdl-list__item\">\n" +
+                    "                 <span class=\"mdl-list__item-primary-content\ inner-span\">\n" +
+                    "                     <i class=\"material-icons mdl-list__item-avatar\">person</i>\n" +
+                    "                 <span class=\"todolist-content\">" + $("#todo-content").val() + "</span>\n" +
+                    "                 </span>\n" +
+                    "                        <a class=\"todo-done mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>\n" +
+                    "                        <a id=\"delete-list\" class=\"mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>" +
+                    "                    </div>\n" +
+                    "                </li>");
+            }else if(add_count<15){
+                $(".todolist-prepend-right").prepend("<li id=\""+add_count+"\" class=\"todolist_add_div\">\n" +
+                    "                    <div class=\"todo-over mdl-list__item\">\n" +
+                    "                 <span class=\"mdl-list__item-primary-content\ inner-span\">\n" +
+                    "                     <i class=\"material-icons mdl-list__item-avatar\">person</i>\n" +
+                    "                 <span class=\"todolist-content\">" + $("#todo-content").val() + "</span>\n" +
+                    "                 </span>\n" +
+                    "                        <a class=\"todo-done mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>\n" +
+                    "                        <a id=\"delete-list\" class=\"mdl-list__item-secondary-action\" href=\"#\"><i class=\"material-icons\">star</i></a>" +
+                    "                    </div>\n" +
+                    "                </li>");
+            }
+            add_count++;
+        })
+
+
+        $(document).on("click", "#delete-list", function () {
+            $(this).parent().remove();
+        })
+
+        $(document).on("click", ".todo-done", function () {
+            if (!$(this).hasClass("strong")) {
+                $(this).addClass("strong");
+                $(this).parent().addClass("strong");
+            } else {
+                $(this).removeClass("strong");
+                $(this).parent().removeClass("strong");
+            }
+
+        })
+
+    </script>
+</div>
+</body>
+</html>
