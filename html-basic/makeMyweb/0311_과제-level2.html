@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    
+    </style>
+</head>
+<body>
+    
+    <div id="fcChanger">
+
+        <span onclick="changeFc();" style="border: 2px solid orange;">화씨를 섭씨로 변환하기</span>
+        <span onclick="changeCf();" style="border: 2px solid orange;">섭씨를 화씨로 변환하기</span>
+        <br><br>
+        <span id="fahrenheit" style="border: 1px solid black;">보여지는 곳</span>
+        <br><br>
+        <span id="celsius" style="border: 1px solid black;">보여지는 곳</span>
+
+    </div>
+
+    <script type="text/javascript">
+
+        var fahrenheit = Number(fahrenheit);
+        var celsius = Number(celsius);
+
+        function changeFc(){
+            fahrenheit = prompt("화씨를 입력하세요","°F");
+            celsius = (fahrenheit - 32) / 1.8;
+            document.getElementById("fahrenheit").innerHTML = celsius + "°C 입니다.";
+        }
+
+        function changeCf(){
+            celsius = prompt("섭씨를 입력하세요","°C");
+            fahrenheit = celsius * 1.8 + 32;
+            document.getElementById("celsius").innerHTML = fahrenheit + "°F 입니다.";
+        }
+
+
+    </script>
+</body>
+</html>

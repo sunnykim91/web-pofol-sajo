@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <!--사용자의 키, 체중을 입력받아서
+        BMI 계산해볼거임.
+        BMI는 체중/키(m)^2-->
+    <div>
+        당신의 BMI는
+        <span id="bmi"></span>
+        <span id="bmi_result"></span>
+    </div>
+
+    <script type="text/javascript">
+
+        var height = prompt("당신의 키를 입력하세요","");
+        var weight = prompt("당신의 몸무게를 입력하세요","");
+
+        height = Number(height)/100;
+        weight = Number(weight);
+        var bmi = weight/height**2;
+        console.log(bmi);
+        document.getElementById("bmi").innerHTML=bmi;
+
+        if(bmi<18.5){
+            document.getElementById("bmi_result").innerHTML="저체중입니다.";
+
+        }else if(bmi>=18.5&&bmi<23){
+            document.getElementById("bmi_result").innerHTML="정상입니다.";
+        }else{
+            document.getElementById("bmi_result").innerHTML="과체중입니다.";
+        }
+
+
+    </script>
+</body>
+</html>
