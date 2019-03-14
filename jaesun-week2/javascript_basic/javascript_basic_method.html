@@ -3,8 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        //callback function
+        $(function(){
+            console.log("3");
+        });
+
+        //document ready
+        $(document).ready(function(){
+            console.log("1");
+        });
+
+        //window ready : window load 3.x removed
+        //deprecated(삭제예정), removed
+        $(window).ready(function(){
+            console.log("2");
+        });
+    </script>
 </head>
+
+
 <body>
+    <a href="#">test</a>
+    <script type="text/javascript">
+
+        /*
+        * jquery 에서 각 이벤트는
+        * $(요소).eventName(실행할 함수);
+        *
+        * $(요소).attr(요소이름); 해당 요소의 속성값을 가져온다.
+        *
+        * */
+
+        // $('a').blur(function(){
+        //     alert('test');
+        // });
+
+
+        $('a').click(function(e){
+            e.preventDefault();
+            // alert($(this).attr('href'));
+            $(this).hide();
+            return true;
+            // 이벤트를 발생시킨 요소 : target, currentTarget
+
+        });
+        //
+        // $('a').mouseover(function(){
+        //     alert('mouseover');
+        // })
+    </script>
 
 </body>
 </html>
