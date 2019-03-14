@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <title>Sunny To Do List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>
+    <style>
+        ul {
+            list-style: none;
+        }
+        .mdl-checkbox{
+            float:right;
+            text-align: right;    
+            vertical-align: bottom;
+        }
+        .container {
+            text-align: center;
+        }
+
+        .btn {
+            text-align: center;
+        }
+
+        .demo-card-wide.mdl-card {
+            width: 512px;
+            text-align: center;
+        }
+
+        .demo-card-wide>.mdl-card__title {
+            color: rgb(0, 0, 0);
+            height: 176px;
+            background-image: url('ryan.png');
+        }
+
+        .demo-card-wide>.mdl-card__menu {
+            color: #fff;
+        }
+        .list-group{
+            padding-left: 40%;
+        }
+
+        .demo-layout-transparent {
+            background: url('kakaobgimg.jpg') center / cover;
+        }
+
+        .demo-layout-transparent .mdl-layout__header,
+        .demo-layout-transparent .mdl-layout__drawer-button {
+            
+            color: rgb(243, 106, 82);
+        }
+               
+        
+        .mdl-list__item-secondary-action{
+            margin:5px;
+        }
+        .mdl-list__item{
+            background-color: rgb(148, 207, 255);
+            border: 2px solid rgb(61, 95, 248);
+            margin-bottom: 5px;
+            margin-top: 5px;
+            display: inline-block;
+            width: 300px;
+            height: fit-content;
+            padding: 5px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Title</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link addCardbtn" href="" style="color:rgb(243, 106, 82)">할 일 추가하기</a>
+                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
+                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
+                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+                <h1 style="text-align: center;">Sunny's To Do List</h1>
+                
+
+                <dialog class="addCard">
+                    <div class="demo-card-wide mdl-card ">
+                        <div class="mdl-card__title">
+                        </div>
+                        <div class="mdl-card__title2" style="background-color:rgb(255, 253, 220);text-align: left;">
+                            <span style="font-size: 25px; "><strong> &nbsp;&nbsp; 해야 할 일이 무엇인가요?</strong></span>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <form id="inputForm" name="inputForm" action="#" method="POST" onsubmit="return checkform()">
+                                <input type="text" id="doList" name="doList">
+                                <input style="background-color: rgb(245, 234, 80);color: rgb(32, 10, 10);" type="submit" value="할 일 추가">
+                            </form>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons dialog_todo_close" style="background-color:crimson">close</i>
+                            </button>
+                        </div>
+                    </div>
+                </dialog>
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#all-panel" class="mdl-tabs__tab is-active">전체보기</a>
+                        <a href="#ing-panel" class="mdl-tabs__tab">할 일</a>
+                        <a href="#complete-panel" class="mdl-tabs__tab">완료한 일</a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="all-panel">
+                        <ul class="demo-list-control list-group list-group-flush todolist-all" id="allList">
+                            
+                        </ul>
+                    </div>
+                    
+                    <div class="mdl-tabs__panel" id="ing-panel">
+                        <ul class="demo-list-control list-group list-group-flush todolist-ing" id="ingList">
+                        
+                        </ul>
+                    </div>
+
+                    <div class="mdl-tabs__panel" id="complete-panel">
+                        <ul class="demo-list-control list-group list-group-flush todolist-complete" id="comList">
+                        </ul>
+
+                    </div>
+                </div>
+
+        </main>
+    </div>
+
+
+
+    <script type="text/javascript">
+        
+        function checkform() {
+
+            if (inputForm.doList.value == '') 
+            {
+                alert("내용을 입력해주세요");
+                inputForm.doList.focus();
+                return false;
+            }
+
+        }
+
+        $(function () {
+
+            $(document).ready(function () {
+                $('form').submit(function (e) {
+                    e.preventDefault();
+
+
+                    var addContent = '<li class="mdl-list__item">'
+                                      +  '<span class="mdl-list__item-secondary-action">'
+                                   + $('input[name="doList"]').val()
+                                    + '<br><br><br></span>'
+                                    + '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">'
+                                   + '완료 <input name="checkbox" type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" onClick="moveComplete();" />'
+                                   + '&nbsp;&nbsp; <button class="btn btn-danger btn-sm" name="delButton">삭제</button>'
+                                   + '</label>'
+                                + '</li>';
+
+                    $('#allList').append(addContent);
+                    $('#ingList').append(addContent);
+                    
+                    $('input[name="doList"]').val('');
+                });
+
+
+            });
+
+
+            $(document).on("click", "button[name=delButton]", function () {  // 아직 생기지않은것들에 대한 이벤트는 on을 써야함!!
+                $(this).parent().parent().remove();
+            });
+
+
+            $('.addCardbtn').on('click', function (e) {
+                e.preventDefault();
+
+                $('.addCard').get(0).showModal();
+            });
+
+            $(document).on('click', '.dialog_todo_close + span', function () {
+                $(this).parents('dialog').get(0).close();
+            });
+
+
+
+            
+        });
+
+        function moveComplete(){  
+            var x = $(this).parent().parent().html();
+            console.log(x);
+            //$('#comList').append(x);
+        }
+
+
+        //$(요소).remove() : 요소를 제거
+    </script>
+</body>
+
+</html>
