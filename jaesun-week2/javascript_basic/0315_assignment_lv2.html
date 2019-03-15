@@ -21,12 +21,25 @@
         table tr td {
             display: inline-block;
             text-align: center;
-            width: 100px;
-            height: 100px;
-            line-height: 100px;
-            font-size: 50px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
             color: #b5b0ad;
             border: 1px solid #de9828;
+        }
+
+        #table_main {
+            height: 300px;
+
+        }
+
+        .hr {
+            border-bottom: 2px solid #b5b0ad;
+        }
+
+        #print {
+            color: #de5b9a;
         }
     </style>
 
@@ -60,6 +73,7 @@
                 <a id="game2" class="mdl-navigation__link" href="#">No.2</a>
                 <a id="game3" class="mdl-navigation__link" href="#">No.3</a>
                 <a id="game4" class="mdl-navigation__link" href="#">No.4</a>
+                <a id="print" class="mdl-navigation__link" href="#" onclick="printArea()">print</a>
             </nav>
         </div>
     </header>
@@ -78,24 +92,15 @@
             <input id="game_submit" type="submit" value="입력">
         </form>
     </div>
-    <a href="#" onclick="printArea()">인쇄하기</a>
     <main class="mdl-layout__content">
-        <div id="box"style="color:#d5d5d5;">
-            <!--<ul id="game3-result" class="game-result">-->
-            <!--</ul>-->
-
+        <div id="box table_main" style="color:#d5d5d5;">
             <table id="game_result">
-                <!-- <tr>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                 </tr>-->
-            </table>
 
-            <table id="history">
+            </table>
+            <p class="hr">
+            <h4>GAME HISTORY</h4>
+            </p>
+            <table id="game_history">
 
             </table>
             <div class="price">
@@ -106,16 +111,38 @@
 
     </main>
 </div>
-
 <script>
 
+    var game_history = [];
+    var cafe = 0;
+
+    function coffeee(numbers) {
+        cafe++;
+        // game_history.push(numbers);
+        var boy = game_history.length;
+        console.log("boy = " + boy);
+        for (var l = 0; l < game_history.length; l++) {
+
+            $("#game_history").append(" <tr>\n" +
+                "                    <td></td>\n" +
+                "                    <td></td>\n" +
+                "                    <td></td>\n" +
+                "                    <td></td>\n" +
+                "                    <td></td>\n" +
+                "                    <td></td>\n" +
+                "                </tr>");
+            for (var m = 0; m < 6; m++) {
+                var history_table = document.getElementById("game_history");
+                history_table.rows[l].cells[m].innerHTML = game_history[l][m];
+            }
+        }
+
+    }
 
     $(document).on("click", "#game1", function (e) {
-
         if ($("tr").length > 0) {
             $("tr").remove();
         }
-
         $("#game_result").append(" <tr>\n" +
             "                    <td></td>\n" +
             "                    <td></td>\n" +
@@ -141,11 +168,8 @@
         numbers.sort(function (a, b) {
             return a - b;
         });
-
-        // console.log(numbers);
-
-        // $(".game-result").html("<li>"+numbers+"<\/li>");
-
+        game_history.push(numbers)
+        coffeee(numbers);
 
         for (var j = 0; j < numbers.length; j++) {
             var table = document.getElementById("game_result");
@@ -160,16 +184,11 @@
         }
         var number_group = []
         for (var k = 0; k < 5; k++) {
-
             var original_numbers = [];
-
             for (var i = 1; i < 46; i++) {
-
                 original_numbers.push(i);
             }
-
             var numbers = [];
-
             for (var j = 0; j < 6; j++) {
 
                 var number_index = Math.floor(Math.random() * original_numbers.length);
@@ -178,7 +197,6 @@
                 numbers.push(get_number);
                 original_numbers.splice(number_index, 1);
             }
-
             numbers.sort(function (a, b) {
                     return a - b;
                 }
@@ -195,7 +213,10 @@
                 var table = document.getElementById("game_result");
                 table.rows[k].cells[j].innerHTML = numbers[j];
             }
+
+            game_history.push(numbers)
         }
+        coffeee(numbers);
     })
     var menu;
     $(document).on("click", "#game3", function (e) {
@@ -212,62 +233,13 @@
         if ($("tr").length > 0) {
             $("tr").remove();
         }
-            if (menu == 3) {
-                menu3(e);
-            } else if (menu == 4) {
-                menu4(e);
-            }
+        if (menu == 3) {
+            menu3(e);
+        } else if (menu == 4) {
+            menu4(e);
+        }
 
     });
-
-    // $(document).on("click", "#game_submit", function menu3(e) {
-    //     e.preventDefault();
-    //
-    //     var count = $("#game_count").val();
-    //     var number_group = []
-    //     for (var k = 0; k < count; k++) {
-    //
-    //         var original_numbers = [];
-    //
-    //         for (var i = 1; i < 46; i++) {
-    //
-    //             original_numbers.push(i);
-    //         }
-    //
-    //         var numbers = [];
-    //
-    //         for (var j = 0; j < 6; j++) {
-    //
-    //             var number_index = Math.floor(Math.random() * original_numbers.length);
-    //
-    //             var get_number = original_numbers[number_index];
-    //             numbers.push(get_number);
-    //             original_numbers.splice(number_index, 1);
-    //         }
-    //
-    //         numbers.sort(function (a, b) {
-    //                 return a - b;
-    //             }
-    //         );
-    //
-    //         $("#game_result").append(" <tr>\n" +
-    //             "                    <td></td>\n" +
-    //             "                    <td></td>\n" +
-    //             "                    <td></td>\n" +
-    //             "                    <td></td>\n" +
-    //             "                    <td></td>\n" +
-    //             "                    <td></td>\n" +
-    //             "                </tr>");
-    //
-    //         for (var j = 0; j < numbers.length; j++) {
-    //             var table = document.getElementById("game_result");
-    //             table.rows[k].cells[j].innerHTML = numbers[j];
-    //         }
-    //     }
-    //
-    //
-    // })
-
     $(document).on("click", "#game4", function (e) {
         e.preventDefault();
         if ($("tr").length > 0) {
@@ -308,6 +280,7 @@
                 }
             );
 
+
             $("#game_result").append(" <tr>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -321,11 +294,10 @@
                 var table = document.getElementById("game_result");
                 table.rows[k].cells[j].innerHTML = numbers[j];
             }
+            game_history.push(numbers)
         }
-
-
+        coffeee(numbers);
     };
-
 
     function menu4(e) {
         e.preventDefault();
@@ -360,7 +332,6 @@
                     return a - b;
                 }
             );
-
             $("#game_result").append(" <tr>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -374,34 +345,30 @@
                 var table = document.getElementById("game_result");
                 table.rows[k].cells[j].innerHTML = numbers[j];
             }
+            game_history.push(numbers)
+
         }
-
         $(".price-result").text(price);
-
+        coffeee(numbers);
     }
-
-
-
 
     var initBody;
 
     function beforePrint() {
-     boxes = document.body.innerHTML;
-     document.body.innerHTML = box.innerHTML;
+        boxes = document.body.innerHTML;
+        document.body.innerHTML = box.innerHTML;
     }
+
     function afterPrint() {
-     document.body.innerHTML = boxes;
+        document.body.innerHTML = boxes;
     }
+
     function printArea() {
-     window.print();
+        window.print();
     }
 
     window.onbeforeprint = beforePrint;
     window.onafterprint = afterPrint;
-
-
-
-
 
 
 </script>
