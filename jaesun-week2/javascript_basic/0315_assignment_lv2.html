@@ -12,16 +12,12 @@
         #game-count {
             display: none;
         }
-
         table {
             margin: 0 auto;
-
         }
-        .box{
+        .box {
             height: 200px;
-
         }
-
         table tr td {
             display: inline-block;
             text-align: center;
@@ -32,25 +28,19 @@
             color: #b5b0ad;
             border: 1px solid #de9828;
         }
-
         #table_main {
             height: 300px;
-
         }
-
         .hr {
             margin-top: 100px;
             border-bottom: 2px solid #b5b0ad;
         }
-
         #print {
             color: #de5b9a;
         }
     </style>
-
 </head>
 <body>
-
 <!-- Uses a transparent header that draws on top of the layout's background -->
 <style>
     .demo-layout-transparent {
@@ -100,9 +90,8 @@
     <main class="mdl-layout__content">
         <div id="box table_main" style="color:#d5d5d5;">
             <div class="box">
-            <table id="game_result">
-
-            </table>
+                <table id="game_result">
+                </table>
             </div>
             <p class="hr">
             <h4>GAME HISTORY</h4>
@@ -122,13 +111,16 @@
 
     var game_history = [];
     var cafe = 0;
-
+    var inverse_game_history=[];
     function coffeee(numbers) {
         cafe++;
         // game_history.push(numbers);
-        var boy = game_history.length;
-        console.log("boy = " + boy);
-        for (var l = 0; l < game_history.length; l++) {
+
+        for(var i=0;i<game_history.length;i++){
+            inverse_game_history[i]=game_history[game_history.length-1-i];
+        }
+
+        for (var l = 0; l < inverse_game_history.length; l++) {
 
             $("#game_history").append(" <tr class='result'>\n" +
                 "                    <td></td>\n" +
@@ -140,12 +132,10 @@
                 "                </tr>");
             for (var m = 0; m < 6; m++) {
                 var history_table = document.getElementById("game_history");
-                history_table.rows[l].cells[m].innerHTML = game_history[l][m];
+                history_table.rows[l].cells[m].innerHTML = inverse_game_history[l][m];
             }
         }
-
     }
-
     $(document).on("click", "#game1", function (e) {
         if ($("tr").length > 0) {
             $("tr").remove();
@@ -158,7 +148,6 @@
             "                    <td></td>\n" +
             "                    <td></td>\n" +
             "                </tr>");
-
         var original_numbers = [];
         for (var i = 1; i < 46; i++) {
             original_numbers.push(i);
@@ -166,12 +155,10 @@
         var numbers = [];
         for (var j = 0; j < 6; j++) {
             var number_index = Math.floor(Math.random() * original_numbers.length);
-
             var get_number = original_numbers[number_index];
             numbers.push(get_number);
             original_numbers.splice(number_index, 1);
         }
-
         numbers.sort(function (a, b) {
             return a - b;
         });
@@ -183,13 +170,11 @@
             table.rows[0].cells[j].innerHTML = numbers[j];
         }
     })
-
     $(document).on("click", "#game2", function (e) {
         e.preventDefault();
         if ($("tr").length > 0) {
             $("tr").remove();
         }
-        var number_group = []
         for (var k = 0; k < 5; k++) {
             var original_numbers = [];
             for (var i = 1; i < 46; i++) {
