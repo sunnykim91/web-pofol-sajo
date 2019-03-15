@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        // for (var i = 0; i < 5; i++) {
+        //     var lotto_num_list = [];
+        //
+        //     while (lotto_num_list.length < 6) {
+        //         var lotto_sum_sel = Math.floor((Math.random() * 45) + 1);
+        //         if (lotto_num_list.indexOf(lotto_sum_sel) == -1) {
+        //             lotto_num_list.push(lotto_sum_sel);
+        //         }
+        //     }
+        //
+        //     lotto_num_list.sort(function (a, b) {
+        //         return a - b;
+        //     })
+        //
+        //     console.log(lotto_num_list);
+        // }
+        //
+
+
+        for(var j=0;j<6;j++) {
+            var original_numbers = [];
+            for (i = 1; i < 46; i++) {
+                original_numbers.push(i);
+            }
+
+            var numbers = [];
+
+            for (var i = 0; i < 6; i++) {
+                // var original_numbers = [1,2,3,4,5,6,7,8,9,10];
+                var number_index = Math.floor((Math.random() * original_numbers.length));
+                var get_number = original_numbers[number_index];
+                numbers.push(get_number);
+                original_numbers.splice(number_index, 1);
+
+            }
+            numbers.sort(function (a, b) {
+                return a - b;
+            })
+            console.log(numbers);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
