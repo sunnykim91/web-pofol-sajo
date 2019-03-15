@@ -17,6 +17,10 @@
             margin: 0 auto;
 
         }
+        .box{
+            height: 200px;
+
+        }
 
         table tr td {
             display: inline-block;
@@ -35,6 +39,7 @@
         }
 
         .hr {
+            margin-top: 100px;
             border-bottom: 2px solid #b5b0ad;
         }
 
@@ -94,9 +99,11 @@
     </div>
     <main class="mdl-layout__content">
         <div id="box table_main" style="color:#d5d5d5;">
+            <div class="box">
             <table id="game_result">
 
             </table>
+            </div>
             <p class="hr">
             <h4>GAME HISTORY</h4>
             </p>
@@ -123,7 +130,7 @@
         console.log("boy = " + boy);
         for (var l = 0; l < game_history.length; l++) {
 
-            $("#game_history").append(" <tr>\n" +
+            $("#game_history").append(" <tr class='result'>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -143,7 +150,7 @@
         if ($("tr").length > 0) {
             $("tr").remove();
         }
-        $("#game_result").append(" <tr>\n" +
+        $("#game_result").append(" <tr class='result'>\n" +
             "                    <td></td>\n" +
             "                    <td></td>\n" +
             "                    <td></td>\n" +
@@ -201,7 +208,7 @@
                     return a - b;
                 }
             );
-            $("#game_result").append(" <tr>\n" +
+            $("#game_result").append(" <tr class='result'>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -221,9 +228,9 @@
     var menu;
     $(document).on("click", "#game3", function (e) {
         e.preventDefault();
-        if ($("tr").length > 0) {
-            $("tr").remove();
-        }
+        // if ($("tr").length > 0) {
+        //     $(".result").remove();
+        // }
         $("#game-count").css("display", "inline-block");
 
         menu = 3;
@@ -242,9 +249,9 @@
     });
     $(document).on("click", "#game4", function (e) {
         e.preventDefault();
-        if ($("tr").length > 0) {
-            $("tr").remove();
-        }
+        // if ($("tr").length > 0) {
+        //     $("tr").remove();
+        // }
         $("#game-count").css("display", "inline-block");
 
         menu = 4;
@@ -254,7 +261,6 @@
         e.preventDefault();
 
         var count = $("#game_count").val();
-        var number_group = []
         for (var k = 0; k < count; k++) {
 
             var original_numbers = [];
@@ -274,14 +280,11 @@
                 numbers.push(get_number);
                 original_numbers.splice(number_index, 1);
             }
-
             numbers.sort(function (a, b) {
                     return a - b;
                 }
             );
-
-
-            $("#game_result").append(" <tr>\n" +
+            $("#game_result").append(" <tr class='result'>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -302,12 +305,8 @@
     function menu4(e) {
         e.preventDefault();
         console.log("game4");
-
         var count = $("#game_count").val();
         var price = count * 1000;
-
-        var number_group = []
-
         for (var k = 0; k < count; k++) {
 
             var original_numbers = [];
@@ -332,7 +331,7 @@
                     return a - b;
                 }
             );
-            $("#game_result").append(" <tr>\n" +
+            $("#game_result").append("<tr class='result'>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
