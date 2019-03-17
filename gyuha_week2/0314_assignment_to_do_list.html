@@ -4,7 +4,9 @@
     추가할 기능!!
     (완료) 리스트 전부 삭제 버튼 만들기
     (완료?) 추가할 수 있는 리스트 개수 제한 -- 이미지 크기로 자동으로 한정되어 있는듯 12개까지 가능
-    더블 클릭하면 수정할 수 있는 기능
+    (거의 완료)더블 클릭하면 수정할 수 있는 기능
+    -> 문제사항 : 리스트 수정 이후에 휴지통 아이콘으로 삭제해도 All done 버튼이 그대로 남아있음.
+       문제원인 : 수정 되기 전에 리스트의 길이가 그대로 남아있어서 길이로 조건을 주는 것이 통하지 않음.
     푸쉬 메세지 보내기(ex)일정시간에 할 일이 많이 남아있다는 푸쉬 메세지
     푸쉬 알람 켜기/끄기 설정
 -->
@@ -94,6 +96,13 @@
             font-size: 2rem;
         }
 
+        .edit_ul {
+            font-size: 32px;
+            font-weight: 600;
+            list-style: none;
+            padding: 0;
+        }
+
     </style>
 
 
@@ -138,7 +147,7 @@
                 if ($('input[name="todo"]').val() == '') {
                     alert('내용을 입력해 주세요.');
                     //return false;
-        //입력하 내용이 있으면 list를 추가하고 입력된 값을 초기화----------------------------------
+        //입력한 내용이 있으면 list를 추가하고 입력된 값을 초기화----------------------------------
                 } else {
 
                     $('.square').append('<ul><li class="to_do_list">' + $('input[name="todo"]').val()
@@ -154,9 +163,12 @@
         $(document).on("click", '#list_del', function (e) {
             e.preventDefault();
             $(this).parent().remove();
-        
+            console.log('to do :' + $('.to_do_list').length +'edit :' + $('.edit_list').length);
+            console.log($('li').length);
         //리스트가 없을 시 버튼 숨김----------------------------------------------------------------
-            if($('.to_do_list').length == 0)
+        //수정 시 $('.to_do_list').length의 길이가 그대로 남음 - > why? remove를 한게 아니라
+        //.hmtl()을 이용해 수정을 해준 것뿐이기 때문에 그대로 남음
+            if($('.to_do_list').length == 0 && $('.edit_list').length == 0)
             {
                 $('#all_clear').css('display','none');
             }
@@ -226,6 +238,36 @@
                 $('#all_clear').css('display','none');
             }
         })
+
+        //더블 클릭 했을 시 to-do-list 수정창 띄우기
+        $(document).on('dblclick', '.to_do_list', function(e){
+            e.preventDefault();
+            //원래 있던 내용을 없애고 다른 내용을 바꿀 때는 .html()
+            //있던 내용의 또 다른 내용을 덧붙일 때는 .prepend() or .append()
+            //edit 버튼 클릭 시 수정하기에서 부모로 잡아 .html()을 사용하기 위해 부모로 div태그를 넣음.
+            $(this).html('<div class="edit_group"><input type="text" placeholder="수정해주세요" class="edit" name="edit_val">'+
+            '<input type="submit" value="edit" class="todo_edit"></div>');
+            //자동으로 커서 이동시키기
+            $('.edit').focus();
+            
+        })
+
+        //edit 버튼 클릭 시 수정하기
+        $(document).on('click', '.todo_edit', function(e){
+            e.preventDefault();
+            console.log($('input[name="edit_val"]').val());
+            $(this).parent().html( '<ul class="edit_ul"><li class="edit_list">' + $('input[name="edit_val"]').val()
+                        + '<i id="list_del" class="material-icons md-dark icon">delete_forever</i>' +
+                        '<span id="tik">' + dd + '</span>' + '</li></ul>');
+                        //리스트가 없을 시 버튼 숨김----------------------------------------------------------------
+        })
+
+        //수정 엔터키 설정, 동적으로 생겨난 태그에 관한 것이므로  $(document).on 사용
+        $(document).on('keypress', '.edit', function(e){
+            if (e.which == 13) {
+                $(".todo_edit").click();
+            }
+        });
     </script>
 </body>
 
