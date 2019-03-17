@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ㄴㅇTTㅇ</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
@@ -12,12 +12,11 @@
         #game-count {
             display: none;
         }
+
         table {
             margin: 0 auto;
         }
-        .box {
-            height: 200px;
-        }
+
         table tr td {
             display: inline-block;
             text-align: center;
@@ -28,13 +27,20 @@
             color: #b5b0ad;
             border: 1px solid #de9828;
         }
+
         #table_main {
             height: 300px;
         }
+
         .hr {
             margin-top: 100px;
             border-bottom: 2px solid #b5b0ad;
         }
+
+        .game-line {
+            color: darkred;
+        }
+
         #print {
             color: #de5b9a;
         }
@@ -44,7 +50,7 @@
 <!-- Uses a transparent header that draws on top of the layout's background -->
 <style>
     .demo-layout-transparent {
-        background: url('https://post-phinf.pstatic.net/MjAxNzExMThfMTU3/MDAxNTEwOTg1MjU0MDMw.UnE6KDZeDvuggh3tCZyAh1TnZdmvZQGLVZbT2nhBIAYg.9QvOIhmCZnSwa0BXJ8CVs3ROxovGtlVmRmglS2HE8esg.JPEG/20171118-006.jpg?type=w1200') center / cover;
+        background: url('https://cdn.crowdpic.net/list-thumb/thumb_l_CB935F01B9C61F9E6C35C1FFDDF0F804.jpg') center / cover;
     }
 
     .demo-layout-transparent .mdl-layout__header,
@@ -66,8 +72,8 @@
             <nav class="mdl-navigation">
                 <a id="game1" class="mdl-navigation__link" href="#">No.1</a>
                 <a id="game2" class="mdl-navigation__link" href="#">No.2</a>
-                <a id="game3" class="mdl-navigation__link" href="#">No.3</a>
-                <a id="game4" class="mdl-navigation__link" href="#">No.4</a>
+                <a id="game3" class="mdl-navigation__link" href="#" data="3">No.3</a>
+                <a id="game4" class="mdl-navigation__link" href="#" data="4">No.4</a>
                 <a id="print" class="mdl-navigation__link" href="#" onclick="printArea()">print</a>
             </nav>
         </div>
@@ -89,20 +95,17 @@
     </div>
     <main class="mdl-layout__content">
         <div id="box table_main" style="color:#d5d5d5;">
-            <div class="box">
-                <table id="game_result">
-                </table>
-            </div>
-            <p class="hr">
+            <h4>GAME RESULT</h4>
+            <table id="game_result">
+            </table>
+            <p class="hr"></p>
             <h4>GAME HISTORY</h4>
-            </p>
-            <table id="game_history">
 
+            <table id="game_history">
             </table>
             <div class="price">
                 <p class="price-result"></p>
             </div>
-
         </div>
 
     </main>
@@ -111,18 +114,17 @@
 
     var game_history = [];
     var cafe = 0;
-    var inverse_game_history=[];
+    var inverse_game_history = [];
+
     function coffeee(numbers) {
-        cafe++;
-        // game_history.push(numbers);
-
-        for(var i=0;i<game_history.length;i++){
-            inverse_game_history[i]=game_history[game_history.length-1-i];
+        // cafe++;
+        for (var i = 0; i < game_history.length; i++) {
+            inverse_game_history[i] = game_history[game_history.length - 1 - i];
         }
-
+        $(".history_result").append("<hr class=\'game-line\'>");
         for (var l = 0; l < inverse_game_history.length; l++) {
 
-            $("#game_history").append(" <tr class='result'>\n" +
+            $("#game_history").append(" <tr class='history_result result'>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
                 "                    <td></td>\n" +
@@ -134,12 +136,16 @@
                 var history_table = document.getElementById("game_history");
                 history_table.rows[l].cells[m].innerHTML = inverse_game_history[l][m];
             }
+
         }
+
     }
+
     $(document).on("click", "#game1", function (e) {
         if ($("tr").length > 0) {
             $("tr").remove();
         }
+        $("#game-count").css("display", "none");
         $("#game_result").append(" <tr class='result'>\n" +
             "                    <td></td>\n" +
             "                    <td></td>\n" +
@@ -172,6 +178,7 @@
     })
     $(document).on("click", "#game2", function (e) {
         e.preventDefault();
+        $("#game-count").css("display", "none");
         if ($("tr").length > 0) {
             $("tr").remove();
         }
@@ -211,16 +218,22 @@
         coffeee(numbers);
     })
     var menu;
-    $(document).on("click", "#game3", function (e) {
-        e.preventDefault();
-        // if ($("tr").length > 0) {
-        //     $(".result").remove();
-        // }
-        $("#game-count").css("display", "inline-block");
 
+    $(document).on("click", "#game3" , function (e) {
+        e.preventDefault();
+
+        $("#game-count").css("display", "inline-block");
+        console.log("3");
         menu = 3;
 
     });
+
+    $(document).on("click", "#game4", function (e) {
+        e.preventDefault();
+        $("#game-count").css("display", "inline-block");
+
+        menu = 4;
+    })
     $(document).on("click", "#game_submit", function (e) {
         if ($("tr").length > 0) {
             $("tr").remove();
@@ -232,15 +245,7 @@
         }
 
     });
-    $(document).on("click", "#game4", function (e) {
-        e.preventDefault();
-        // if ($("tr").length > 0) {
-        //     $("tr").remove();
-        // }
-        $("#game-count").css("display", "inline-block");
 
-        menu = 4;
-    })
 
     function menu3(e) {
         e.preventDefault();
