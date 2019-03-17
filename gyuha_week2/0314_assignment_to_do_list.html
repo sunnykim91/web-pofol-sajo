@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- 
-    추가할 기능
-    완료 버튼을 누르면 전부 삭제
-    추가할 수 있는 리스트 개수 제한
+    추가할 기능!!
+    (완료) 리스트 전부 삭제 버튼 만들기
+    (완료?) 추가할 수 있는 리스트 개수 제한 -- 이미지 크기로 자동으로 한정되어 있는듯 12개까지 가능
+    더블 클릭하면 수정할 수 있는 기능
+    푸쉬 메세지 보내기(ex)일정시간에 할 일이 많이 남아있다는 푸쉬 메세지
+    푸쉬 알람 켜기/끄기 설정
 -->
 
 <head>
@@ -82,10 +85,15 @@
         #tik {
             font-size: 16px;
         }
+        
+        #all_clear {
+            display: none;
+            position:absolute;
+            top:10px;
+            right:10px;
+            font-size: 2rem;
+        }
 
-        /* .mdl-textfield__input {
-            display: inline-block;
-        } */
     </style>
 
 
@@ -99,10 +107,7 @@
                 <div id="clock"></div>
                 <i class="material-icons md-dark main_icon">hourglass_empty</i>
             </div>
-            <!-- <div class="sub">
-            <input type="text" class="sub_input" name="todo">
-            <input type="submit" class="sub_go" name="가입완료" value="go">
-        </div> -->
+           
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sub">
                 <input id="input_todo" class="mdl-textfield__input" type="text" name="todo" autocomplete="off">
                 <label class="mdl-textfield__label">TODO!</label>
@@ -112,16 +117,12 @@
                 </button>
             </div>
         </div>
-
+        <button id="all_clear">All done!</button>
     </div>
 
 
     <script>
-        // var currentA = new Date();
-        // var currentB = currentA.getMonth()+1;
-
-        // var currentD = currentB +'-'+ currentC;
-
+        //숫자로 표현되는 달을 문자열 달로 표현-----------------------------------------------
         var month = ["January", "February", "March", "April", "May", "June", "July", "August",
             "September", "October", "November", "December"];
         var currentD = new Date();
@@ -129,40 +130,47 @@
         var currentDt = currentD.getDate();
         var dd = month[d] + '-' + currentDt;
 
+        //플러스 버튼을 클릭했을 때 이벤트------------------------------------------------------
         $(document).ready(function () {
             $('.sub_go').click(function (e) {
                 e.preventDefault();
+        //입력한 내용이 없으면 경고창을 띄움------------------------------------------------------
                 if ($('input[name="todo"]').val() == '') {
                     alert('내용을 입력해 주세요.');
                     //return false;
+        //입력하 내용이 있으면 list를 추가하고 입력된 값을 초기화----------------------------------
                 } else {
-                    // $('.square').append('<li class="test">' + $('input[name="todo"]').val()
-                    //     + '<button class="remove">remove</button>' + '</li>');
 
                     $('.square').append('<ul><li class="to_do_list">' + $('input[name="todo"]').val()
                         + '<i id="list_del" class="material-icons md-dark icon">delete_forever</i>' +
                         '<span id="tik">' + dd + '</span>' + '</li></ul>');
-
-                    // $('.square').append('<li class="mdl-list__item to_do_list">' + $('input[name="todo"]').val()
-                    //     + '<i id="list_del" class="material-icons mdl-list__item-icon">delete_forever</i>' + '</li>'+'<br>');
-
+                    
                     $('input[name="todo"]').val('');
                 }
             });
         });
 
+        //휴지통 이모티콘을 클릭하면 this가 가리키는 i태그의 부모인 li태그를 삭제----------------------
         $(document).on("click", '#list_del', function (e) {
             e.preventDefault();
             $(this).parent().remove();
+        
+        //리스트가 없을 시 버튼 숨김----------------------------------------------------------------
+            if($('.to_do_list').length == 0)
+            {
+                $('#all_clear').css('display','none');
+            }
         })
 
 
+        //리얼타임을 화면에 표시---------------------------------------------------------------------
         function updateClock() {
             var currentTime = new Date();
             var currentHours = currentTime.getHours();
             var currentMinutes = currentTime.getMinutes();
             var currentSeconds = currentTime.getSeconds();
 
+            //시계 표기 방법에 대한 여러 환경설정------------------------------------------------------   
             // Pad the minutes and seconds with leading zeros, if required
             currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
             currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
@@ -185,16 +193,39 @@
             //$('#clock').remove();
 
         }
-
+        //1초마다 시간을 화면에 표기
         $(document).ready(function () {
             setInterval('updateClock()', 1000);
         });
 
+        //엔터키 설정
         $("#input_todo").keypress(function (e) {
             if (e.which == 13) {
                 $("#go").click();
             }
         });
+
+        //모두완료 버튼 화면에 표시
+        $(document).ready(function () {
+            $(document).on("click", ".sub_go" ,function(e){
+            if($('.to_do_list').length >= 1)
+            {
+                $('#all_clear').css('display','inline-block');
+            } else {
+                $('#all_clear').css('display','none');
+            }
+            });
+        });
+
+        //모두완료 클릭 했을 시 리스트 전체 삭제 이벤트
+        $(document).on('click','#all_clear',function(e){
+            $('.to_do_list').remove();
+            //리스트가 없을 시 버튼 숨김----------------------------------------------------------------
+            if($('.to_do_list').length == 0)
+            {
+                $('#all_clear').css('display','none');
+            }
+        })
     </script>
 </body>
 
