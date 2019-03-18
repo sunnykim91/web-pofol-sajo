@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "C:\\fds12\\web-pofol-sajo"
+		},
+		{
+			"path": "C:\\fds12\\makeMyWeb"
+		}
+	],
+	"settings": {
+		"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+		"liveServer.settings.multiRootWorkspaceName": "makeMyWeb"
+	}
+}

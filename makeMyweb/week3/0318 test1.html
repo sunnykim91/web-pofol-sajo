@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>무제 문서</title>
+	
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="/media/jquery-3.3.1.min.js"></script>
+	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<style>
+		/*
+			position
+		
+			static
+			relative : 상대적 위치
+			absolute - 절대적 위치
+			float - 뷰 포트 안에서 절대적 위
+			fixed - 고정 위치 
+		
+			aboslute 는 realative랑 섞어서 써야한다.
+			앱솔이 바로 상위 릴레이티브 따라가
+		
+		*/
+		
+			
+		ul{
+			list-style: none;
+			
+		}
+		/*#slide1 {
+			display: none;
+		}
+		#slide2 {
+			//display: none;
+		}*/
+			
+		div{
+			display: inline-flex;
+			background: #de9a44;
+			margin: 3px;
+			width: 100%;
+			float: left;
+			
+		}
+		.div-align{
+			background-color: aquamarine;
+		}
+
+		
+	</style>
+	
+	</head>
+
+<body>
+	
+	<div> 
+		<div class="div-align">
+			<ul class="ul-color">
+				<li id="mainmenu1">Menu1
+					<ul id="slide1">
+						<li>Best 100</li>
+						<li>Top</li>
+						<li>Pants</li>
+						<li>Outer</li>
+						<li>Accessory</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="div-align">
+			<ul class="ul-color">
+				<li id="mainmenu2">Menu2
+					<ul id="slide2">
+						<li>Contct</li>
+						<li>mp</li>
+						<li>ts</li>
+						<li>O</li>
+						<li>ry</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="div-align">
+			<ul class="ul-color">
+				<li id="mainmenu3">Menu3
+					<ul id="slide3">
+						<li>Hello</li>
+						<li>mp</li>
+						<li>ts</li>
+						<li>O</li>
+						<li>ry</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="div-align">
+			<ul class="ul-color">
+				<li id="mainmenu4">Menu4
+					<ul id="slide4">
+						<li>Contct</li>
+						<li>mp</li>
+						<li>ts</li>
+						<li>O</li>
+						<li>ry</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	  
+	
+	
+	
+<script type="text/javascript">
+	$( document ).ready(function() {
+		
+		$("#slide1").hide();
+		$("#slide2").hide();
+		$("#slide3").hide();
+		$("#slide4").hide();
+		
+		$( "#mainmenu1" ).hover(function() {
+		  $("#slide1").show();
+		  });
+		
+
+		$( "#mainmenu1" ).mouseleave(function() {
+			$("#slide1").hide();
+		});
+
+		
+		$( "#mainmenu2" ).hover(function() {
+			$("#slide2").show();
+		});
+
+		$( "#mainmenu2" ).mouseleave(function() {
+			$("#slide2").hide();
+		});
+
+
+		$( "#mainmenu3" ).hover(function() {
+			 $("#slide3").show();
+		});
+		$( "#mainmenu3" ).mouseleave(function() {
+			$("#slide3").hide();
+		});
+
+		$( "#mainmenu4" ).hover(function() {
+			 $("#slide4").show();
+		});
+		$( "#mainmenu4" ).mouseleave(function() {
+			$("#slide4").hide();
+		});
+	});
+
+</script>
+</body>
+</html>
