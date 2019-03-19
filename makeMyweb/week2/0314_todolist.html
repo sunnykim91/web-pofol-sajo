@@ -33,7 +33,7 @@
         ul {
             list-style: none;
         }
-        .mdl-checkbox{
+        .mdl-checkbox__input{
             float:right;
             text-align: right;    
             vertical-align: bottom;
@@ -89,6 +89,7 @@
             padding: 5px;
             
         }
+        
     </style>
 </head>
 
@@ -103,12 +104,12 @@
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
                     <a class="mdl-navigation__link addCardbtn" href="" style="color:rgb(243, 106, 82)">할 일 추가하기</a>
-                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
-                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
-                    <a class="mdl-navigation__link" href="" style="color:rgb(243, 106, 82)">Link</a>
+                    <a class="mdl-navigation__link btn_todo_toggle" href="" style="color:rgb(243, 106, 82)">Toggle</a>
+                    <a class="mdl-navigation__link btn_todo_remove" href="" style="color:rgb(243, 106, 82)">Remove</a>
                 </nav>
             </div>
         </header>
+        
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Title</span>
             <nav class="mdl-navigation">
@@ -132,8 +133,13 @@
                         <div class="mdl-card__actions mdl-card--border">
                             <form id="inputForm" name="inputForm" action="#" method="POST" onsubmit="return checkform()">
                                 <input type="text" id="doList" name="doList">
-                                <input style="background-color: rgb(245, 234, 80);color: rgb(32, 10, 10);" type="submit" value="할 일 추가">
+                                <!--<input style="background-color: rgb(245, 234, 80);color: rgb(32, 10, 10);" type="submit" value="할 일 추가">-->
                             </form>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect todo_add_submit">
+                                할일추가
+                            </a>
                         </div>
                         <div class="mdl-card__menu">
                             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -175,7 +181,7 @@
 
 
     <script type="text/javascript">
-        
+        /*
         function checkform() {
 
             if (inputForm.doList.value == '') 
@@ -186,38 +192,48 @@
             }
 
         }
+        */
 
-        $(function () {
-
-            $(document).ready(function () {
-                $('form').submit(function (e) {
-                    e.preventDefault();
-
-
-                    var addContent = '<li class="mdl-list__item">'
+        var list_item = '<li class="mdl-list__item">'
+                                    + '<span class="mdl-list__item-primary-content"><i class="material-icons">calendar_today</i></span>'
                                       +  '<span class="mdl-list__item-secondary-action">'
-                                   + $('input[name="doList"]').val()
-                                    + '<br><br><br></span>'
-                                    + '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">'
-                                   + '완료 <input name="checkbox" type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" onClick="moveComplete();" />'
-                                   + '&nbsp;&nbsp; <button class="btn btn-danger btn-sm" name="delButton">삭제</button>'
+                                    + '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'
+                                   + '완료 <input name="checkbox" type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />'
                                    + '</label>'
+                                   + '</span>'
                                 + '</li>';
 
-                    $('#allList').append(addContent);
-                    $('#ingList').append(addContent);
-                    
-                    $('input[name="doList"]').val('');
-                });
+        storage_key = "todos";
 
-
+        function saveTodo(){
+            var data = {};
+            var todos = $('.todolist-all li .mdl-list__item-primary-content');
+            todos.each(function(index) {
+                data[index] = [$(this).attr('data-value'), $(this).hasClass("complete")];
             });
+            localStorage.setItem(storage_key, JSON.stringify(data));
+        }
 
+        function loadTodo() {
+            var todos = localStorage.getItem(storage_key);
+            todos = JSON.parse(todos);
+            for(var key in todos) {
+                var value = todos[key][0];
+                var complete = todos[key][1];
+                sample_item = $(list_item).clone();
+                //componentHandler.upgradeElement(sample_item.get(0));
+                sample_item.find('.mdl-list__item-primary-content').append(value);
+                sample_item.find('.mdl-list__item-primary-content').attr("data-value",value);
+                if(complete) {
+                    sample_item.find('.mdl-list__item-primary-content').addClass('complete')
+                }
+                $('.todolist-all').append(sample_item);
+            }
+            componentHandler.upgradeDom();
+        }
 
-            $(document).on("click", "button[name=delButton]", function () {  // 아직 생기지않은것들에 대한 이벤트는 on을 써야함!!
-                $(this).parent().parent().remove();
-            });
-
+        $(function () {
+            loadTodo();
 
             $('.addCardbtn').on('click', function (e) {
                 e.preventDefault();
@@ -225,20 +241,56 @@
                 $('.addCard').get(0).showModal();
             });
 
+            $('.btn_todo_remove').on('click', function(e) {
+                e.preventDefault();
+                $('.mdl-checkbox.is-checked').parents('li.mdl-list__item').remove();
+                saveTodo();
+            });
+
+            $('.btn_todo_toggle').on('click', function(e) {
+                e.preventDefault();
+                $('.mdl-checkbox.is-checked').parents('li.mdl-list__item').find('.mdl-list__item-primary-content').toggleClass('complete');
+                saveTodo();
+            });
+
             $(document).on('click', '.dialog_todo_close + span', function () {
                 $(this).parents('dialog').get(0).close();
             });
 
 
+            $('.todo_add_submit').click(function() {
+                
+                add_todo_value = $('input[name="doList"]').val();
+                sample_item = $(list_item).clone();
+                sample_item.removeClass('sample_list');
+                componentHandler.upgradeElement(sample_item.get(0));
+                sample_item.find('.mdl-list__item-primary-content').append(add_todo_value);
+                sample_item.find('.mdl-list__item-primary-content').attr("data-value",add_todo_value);
+                $('.todolist-all').append(sample_item);
+                $('input[name="doList"]').val('');
+                $(this).parents('dialog').get(0).close();
+                componentHandler.upgradeDom();
+                saveTodo();
+
+            });
+
+            $(document).on('click','.todolist-all .li span.mdl-list__item-primary-content', function() {
+                $(this).toggleClass('complete');
+                saveTodo();
+            });
+
 
             
         });
 
+/*
         function moveComplete(){  
-            var x = $(this).parent().parent().html();
-            console.log(x);
+            if($(this).is(":checked") == true){
+                console.log("move");
+            }
+            
             //$('#comList').append(x);
-        }
+        }*/
 
 
         //$(요소).remove() : 요소를 제거

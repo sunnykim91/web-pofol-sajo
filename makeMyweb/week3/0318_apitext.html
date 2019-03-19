@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <title>Document</title>
@@ -69,22 +69,33 @@
             </div>
 
             <input type="submit" id="join_submit">
+            <input type="submit" id="load_submit" value="불러오기">
         </form>
     </div>
    
 
     <script>
-
+        /*
+            get으로 바꾸기
+            리턴 폴스 없애기
+            회원 목록 띄우기 level2
+            join_ok.html 
+        */
 
         $(function() {
 
-            $("#join_form").hide();
 
             $("#join_a").click(function() {
                 $("#join_form").toggle();
             });
 
-            $("form").submit(function(){
+            
+                
+          
+            
+
+            $("form").submit(function(e){
+                e.preventDefault();
                 if($('#user_id').val()==''){
                     alert('아이디를 입력하세요');
                     return false;
@@ -135,6 +146,57 @@
                                    + "\n주소 : " + "\n위 정보로 가입하시겠습니까?";
                 
                 alert(printContent);
+
+
+                var storage_content = "content";
+
+            var data_dic = {}
+            data_dic['id'] = $('#user_id').val();           
+            data_dic['pw'] = $('#user_pw').val();
+            data_dic['name'] = $('#user_name').val();
+            data_dic['email'] = $('#user_email').val();
+            data_dic['address'] = $('#user_address').val();
+
+            var content_string  = JSON.stringify(data_dic);
+
+                localStorage.setItem("content",content_string);
+                
+               /*
+
+                //사전형 변수를 문자열로 형변환하기
+                var content_string  = JSON.stringify(content);
+
+                //문자열이었던 데이터를 다시 사전형으로 형변환하기
+                var content_dict = JSON.parse(content_string);
+
+                for(var key in content_dict){
+                    // 해당 사전형 변수에서 하나의 값을 선택하여 꺼내기
+                    console.log($('#'+key).val(content_dict[key]));
+                }
+
+
+                var form_content = localStorage.getItem(storage_key);
+                var split_data = form_content.split("&");
+                for ( var i in split_data ) {
+                    var content_data = split_data[i].split("=");
+                    var key = content_data[0];
+                    var data = content_data[1];
+                    
+                    console.log($('#'+key).val(data));
+                }*/
+
+            });
+
+            $("#load_submit").click(function(e) {
+                e.preventDefault();
+                var a = localStorage.getItem("content");
+                var content_dict = JSON.parse(a);
+                
+                for(var key in content_dict){
+                    // 해당 사전형 변수에서 하나의 값을 선택하여 꺼내기
+                    $('#user_'+ key).val(content_dict[key])
+                    
+                }
             });
 
             $('#zipcode_search').click(function() {
@@ -149,8 +211,7 @@
         });
 
         /*
-        
-
+            
             // 최종 안내 문구 출력
             // 정규표현식 - 이메일 주소, 아이디 등 
             //정규식.test("$email.val() == false"){ alert 이메일 형식이 잘못되었습니다.}
