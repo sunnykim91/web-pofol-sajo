@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qbmhth6xpc&submodules=geocoder"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <style>
+    
+    </style>
+
+</head>
+<body>
+<div id="test_naver_map" style="width:50%;height:500px;"></div>
+<button id="find_address">우편번호</button>
+<input type="text" id="address"><button id="btn_address">주소찾기</button>
+<script>
+var mark_address = "";
+
+$('#find_address').click(function() {
+    daum.postcode.load(function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+              mark_address =  data.address;
+              $('#address').val(mark_address);
+            }
+        }).open();
+        
+    });
+});
+   
+
+var mapOptions = {
+    center: new naver.maps.LatLng(37.7269277,126.8478218),
+    zoom: 10,
+    scaleControl: true,
+    logoControl: true,
+    mapDataControl: true,
+    mapTypeControl: true,
+    zoomControl: true,
+    zoomControlOptions: {
+        position: naver.maps.Position.RIGHT_CENTER
+    }
+};
+// 지도 생성 (지도이름은 naver_map)
+var naver_map = new naver.maps.Map($("#test_naver_map")[0], mapOptions);
+naver_map.setMapTypeId(naver.maps.MapTypeId.NORMAL);
+        // 마커 추가
+        /*naver.maps.Event.addListener(naver_map, 'click', function(e) {
+            // marker.setPosition(e.latlng);
+            var marker = new naver.maps.Marker({
+            position: e.latlng, //마커를 클릭한 자리에 놓을 수 있게함
+            map: naver_map
+        });
+        naver_map.setCenter(e.latlng);
+        // 마커에 이벤트 추가
+        naver.maps.Event.addListener(marker, 'click', function(){
+            alert("test");
+        })
+        });
+*/
+// geocoding. 위도 경도로 주소를 뽑거나 주소로 위도 경도 뽑기.
+        $("#btn_address").click(function(){
+            $("#address").val();
+            naver.maps.Service.geocode({
+                address: $("#address").val()
+            }, function(status, response) {
+                if (status !== naver.maps.Service.Status.OK) {
+                    return alert('Something wrong!');
+                }
+                var result = response.result, // 검색 결과의 컨테이너
+                    items = result.items; // 검색 결과의 배열
+        console.log(items[0]);
+        var item = items[0];
+                // do Something
+                var marker1 = new naver.maps.Marker({
+                    position: new naver.maps.Point(item.point.x,item.point.y),
+                    map: naver_map
+        });
+        naver_map.setCenter(new naver.maps.Point(item.point.x,item.point.y));
+        naver.maps.Event.addListener(marker1, 'click', function(e){
+            var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>로니로티</h3>',
+            '   <p>서울시 광진구 아차산로 225 화양동 7-44 단산화빌딩 3층',
+            '   </p>',
+            '<a href="#"  onclick="window.open(\'review.html\',\'window팝업\',\'width=600, height=600, top=300 left=300\');">리뷰보기</a>'
+        ].join('');
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString
+        });
+        if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(naver_map, marker1);
+            } 
+            });
+            
+        })
+    
+});
+</script>
+</body>
+</html>

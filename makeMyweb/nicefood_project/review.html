@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>리뷰 보기 및 작성</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+    form{
+        text-align:center;
+    }
+    #whole_review{
+        text-align:center;
+        width: 60%;
+        margin: 0 auto
+    }
+    span{
+        line-height: 30px;
+    }
+    input{
+        margin: 30px 0;
+    }
+    </style>
+</head>
+<body>
+    <form action="#" id="save">
+    <label>작성자 : 
+    <input type="text" id="name"></label><br>
+    <textarea rows="7" cols="25" id="review"></textarea><br>
+    <input type="submit" id="btn_submit" value="리뷰 작성">
+    </form>
+    <hr>
+    <div id="whole_review">
+        
+    </div>
+    <script> 
+    var t = 1;
+        function load() {
+           
+                for(var a of Object.keys(localStorage)){ // a = 로컬스토리지 
+                    var check = JSON.parse(localStorage.getItem(a)); 
+                     if(check !== null && Object.keys(check)[0] === "name"){ // id 키가 있는 객체라면
+                      $("#whole_review").append('<span id="name'+t+'"></span><br>'+
+                                                 '<span id="review'+t+'"></span><br>'); // 이 포맷을 html 에 집어넣고
+                         for (var key in check){ // 객체의 키 수만큼 도는 반복문
+                         $("#"+key+t).text(check[key]); // 키와 매치하는 인풋밸류를 키값으로 바꿈
+                        }  
+                         
+                    } t = t+1;    
+                }
+        }
+        $(function(){
+           load();
+            });
+               
+    $("#save").submit(function(){
+        var name = document.getElementById("name").value;
+        var review = document.getElementById("review").value;
+        var whole_review = {};
+                whole_review["name"] = name;
+                whole_review["review"] = review;
+        var string_review = JSON.stringify(whole_review);
+        $("#whole_review").append('<span id="name'+t+'">'+name+'</span><br>'+
+                                  '<span id="review'+t+'">'+review+'</span><br>');
+        localStorage.setItem(name, string_review);
+        
+        
+    });
+    
+    </script>
+</body>
+</html>

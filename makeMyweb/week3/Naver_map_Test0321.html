@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+        
+        
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qbmhth6xpc&submodules=geocoder"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<div id="test_naver_map" style="width:100%;height:400px;"></div>
+<input type="text"  id="address"> <button id="btn_address">주소찾기</button>
+
+
+<script>
+var option = {
+    center: new naver.maps.LatLng(37.655727, 127.043065),
+    zoom: 15,
+    scaleControl: true,
+    logoControl: true,
+    mapDataControl: true,
+    mapTypeControl: true,
+    zoomControl: true
+};
+
+
+
+
+var naver_map = new naver.maps.Map($('#test_naver_map') [0], option);
+
+naver_map.setMapTypeId(naver.maps.MapTypeId.NORMAL);
+
+var locationBtnHtml = '<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">NAVER 그린팩토리</span></a>';
+
+var customControl = new naver.maps.CustomControl(locationBtnHtml, {
+    position: naver.maps.Position.TOP_LEFT
+});
+
+customControl.setMap(naver_map);
+
+var testHTML = '<button class="btn btn-warning">TEST</button>';
+var btnControl  = new naver.maps.CustomControl(testHTML, {
+    position: naver.maps.Position.LEFT_CENTER
+})
+btnControl.setMap(naver_map);
+
+$('.btn_mylct').click(function(){
+    alert('test');
+});
+
+$('.btn.btn-warning').click(function(){
+    naver_map.panBy(new naver.maps.Point(30,30));
+});
+
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(37.3595704, 127.105399),
+    map: naver_map
+});
+
+naver.maps.Event.addListener(naver_map, 'click', function(e) {
+    //marker.setPosition(e.latlng);
+    var marker = new naver.maps.Marker({
+    position: e.latlng,
+    map: naver_map
+    });
+    naver_map.setCenter(e.latlng);
+    
+    naver.maps.Event.addListener(marker,'click',function(e){
+        alert('marker click');
+    });
+    naver.maps.Event.addListener(marker,'click',test);
+});
+
+function test(){
+    alert('test');
+
+    var contentString = [
+                    '<div class="iw_inner">',
+                    '   <h3>서울특별시청</h3>',
+                    '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
+                    '      <br />',
+                    '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
+                    '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+                    '   </p>',
+                    '</div>'
+                ].join('');
+            
+            var infowindow = new naver.maps.InfoWindow({
+                content: contentString
+            });
+            
+            naver.maps.Event.addListener(marker, "click", function(e) {
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(naver_map, marker);
+                }
+            });
+            
+            infowindow.open(naver_map, marker);
+}
+
+$('#btn_address').click(function(){
+    
+
+    naver.maps.Service.geocode({
+        address: $('#address').val()
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert('Something wrong!');
+        }
+
+        var result = response.result, // 검색 결과의 컨테이너
+            items = result.items; // 검색 결과의 배열
+
+        var item = items[0];
+        // do Something
+        var marker = new naver.maps.Marker({
+        position: new naver.maps.Point(item.point.x,item.point.y),
+        map: naver_map
+        });
+        naver_map.setCenter(e.latlng);
+
+        
+        
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+
+<html>
+        <head>
+        
+                <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+                <script type="text/javascript" src="cloud-zoom.js"></script>
+                <link rel="stylesheet" href="cloud-zoom.css" type="text/css">
+
+
+                <style type="text/css">
+                    /* This is the moving lens square underneath the mouse pointer. */
+        .cloud-zoom-lens {
+            border: 4px solid #888;
+            margin:-4px;	/* Set this to minus the border thickness. */
+            background-color:#fff;
+            cursor:move;
+        }
+        
+        /* This is for the title text. */
+        .cloud-zoom-title {
+            font-family:Arial, Helvetica, sans-serif;
+            position:absolute !important;
+            background-color:#000;
+            color:#fff;
+            padding:3px;
+            width:100%;
+            text-align:center;
+            font-weight:bold;
+            font-size:10px;
+            top:0px;
+        }
+        
+        /* cloud zoom wrapper styles */
+        .cloud-zoom-wrap {
+            top:0;
+            z-index:9999;
+            position:relative;
+        }
+        
+        /* This is the zoom window. */
+        .cloud-zoom-big {
+            border:4px solid #ccc;
+            overflow:hidden;
+        }
+        
+        /* This is the loading message. */
+        .cloud-zoom-loading {
+            color:white;
+            background:#222;
+            padding:3px;
+            border:1px solid #000;
+        }
+                </style>
+
+
+        </head>
+
+
+
+
+
+        <body>
+      
+                <div style="width: 300px; height: 400px;">
+                    <a href="http://www.starplugins.com/sites/starplugins/images/jetzoom/large/image1.jpg" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: true, zoomWidth:'300', zoomHeight:'400', adjustY:0, adjustX:10">
+                        <img src="http://www.starplugins.com/sites/starplugins/images/jetzoom/small/image1.jpg" title="Sample Title">
+                    </a>
+                </div>
+        
+           
+
+     
+       
+        </body>
+        </html>

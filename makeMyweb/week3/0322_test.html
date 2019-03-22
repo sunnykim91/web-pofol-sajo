@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <span id="span_test">test</span>
+
+    <script type="text/javascript"> 
+        //일정 스코프 내에서 동작하는 변수 - 지역변수
+        /*
+            var a = document.getElementById('elm_id')             -> a는 jquery가 동작 안함! c형태로 해줘야함.
+            a.click(function() {});
+
+            var b = $('id')       --> 요건 동작함.
+            b.click(function() {});
+
+            var c = $(a);           --> 요렇게 해야 동작함.
+            c.click(function() {});
+        */
+        var value1 = "1";
+
+        //전역
+        value2 = "2";
+
+        //변수의 지역 문제
+        //콜백 지옥
+
+        $(function(){
+            var elem = $("<p id='p_test'>test_p</p>");
+            elem.click(function(){alert('p_click');});
+            var elem2 = $("<p id='p_test2'>test_p2</p>");
+
+            $('#span_test').append(elem);
+            $('#span_test').append(elem2);
+
+            elem2.click(function(){alert('p2_click');});
+
+            var elem3 = "<p id='p_test3'>test_p3</p>";
+            $(elem3).click(function(){alert('p3 click');});
+            $('#span_test').append(elem3);
+            
+
+            //마커 변수를 만들고
+            //그 변수에 이벤트 리스너 걸기  
+        });
+    </script>
+    
+</body>
+</html>
